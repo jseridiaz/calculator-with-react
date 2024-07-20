@@ -25,10 +25,9 @@ const Calculator = () => {
     },
     [operation]
   )
-  // const setClearDispatch = useCallback(() => {
-  //   dispatch({ type: 'CLEAR', payload: {} })
-  // }, [])
-
+  const setClearDispatch = useCallback(() => {
+    dispatch({ type: 'CLEAR' })
+  }, [])
   return (
     <>
       <h1>React Calculator</h1>
@@ -122,7 +121,7 @@ const Calculator = () => {
             text='Clear'
             typeBtn='button'
             action={() => {
-              dispatch({ type: 'CLEAR' })
+              setClearDispatch()
               setToggle(true)
             }}
           />
