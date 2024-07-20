@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useRef, useState } from 'react'
+import { useCallback, useContext, useReducer, useRef } from 'react'
 import './Calculator.css'
 import BtnCalc from '../BtnCalc/BtnCalc'
 import Btn from '../Btn/Btn'
@@ -15,6 +15,19 @@ const Calculator = () => {
   const { currentNumber, firstCalc, secondCalc, operation, result, history } =
     state
   const [toggle, setToggle] = useToggle(true)
+
+  const setDispatch = useCallback(
+    (operation) => {
+      dispatch({
+        type: 'END_CALC',
+        payload: { firstRef: parseInt(firstRef.current.value) }
+      })
+    },
+    [operation]
+  )
+  // const setClearDispatch = useCallback(() => {
+  //   dispatch({ type: 'CLEAR', payload: {} })
+  // }, [])
 
   return (
     <>
@@ -40,16 +53,13 @@ const Calculator = () => {
           </div>
         )}
       </div>
+
       <form
         className='flex-container-column'
         id='calculator-container'
         onSubmit={(e) => {
           e.preventDefault()
-          !toggle &&
-            dispatch({
-              type: operation,
-              firstRef: parseInt(firstRef.current.value)
-            })
+          !toggle && setDispatch(operation)
           setToggle()
         }}
         onKeyDown={(e) => {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 const Btn = memo(({ typeBtn, text, idName, action }) => {
   console.log('me renderizo')
@@ -9,4 +9,4 @@ const Btn = memo(({ typeBtn, text, idName, action }) => {
   )
 })
 
-export default memo(Btn)
+export default Btn

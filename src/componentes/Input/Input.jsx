@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import './Input.css'
 
 const Input = ({ statValue, reference, className }) => {
@@ -12,4 +12,4 @@ const Input = ({ statValue, reference, className }) => {
   )
 }
 
-export default Input
+export default memo(Input)
