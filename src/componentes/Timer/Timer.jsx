@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getTime } from '../utils/getTime/getTime'
 import './Timer.css'
 

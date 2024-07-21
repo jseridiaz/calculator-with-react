@@ -5,10 +5,11 @@ h1 {
 [id='current-result'] {
   z-index: 1;
   font-size: 2rem;
-  width: 100%;
+  width: 65%;
   text-align: left;
   position: relative;
-  top: 3.6rem;
+  top: 2.6rem;
+  left: 91px;
 }
 [id='calculator-container'] {
   position: relative;
@@ -54,8 +55,11 @@ div[id='btn-container-controller'].flex-container {
   text-align: right;
   font-size: 2rem;
   overflow: scroll;
-  background-color: #242424;
+  background-color: var(--bg-primary-color);
   outline: 0px 0px 3px 0px solid black;
+}
+[id='calculator-container'] > input.light-mode {
+  background-color: var(--bg-primary-color-light);
 }
 [id='current-calc'] {
   left: 1%;
@@ -64,9 +68,11 @@ div[id='btn-container-controller'].flex-container {
   font-weight: 700;
   padding: 1rem;
   min-width: 100px;
+  min-height: 145px;
   text-wrap: wrap;
   word-break: break-all;
 }
+
 .set-layout-numbers {
   justify-content: space-around;
   width: 50%;
@@ -74,7 +80,7 @@ div[id='btn-container-controller'].flex-container {
 }
 .operation-container {
   position: relative;
-  width: 150px;
+  width: fit-content;
   right: 5%;
   flex-wrap: wrap;
   height: 200px;
@@ -82,7 +88,7 @@ div[id='btn-container-controller'].flex-container {
 }
 .operation-container > button {
   min-width: 65px;
-  width: 80%;
+  width: 48%;
   height: 50px;
   font-size: 1.3rem;
 }
@@ -143,6 +149,10 @@ div[id='btn-container-controller'].flex-container {
   [id='current-calc'] {
     display: none;
   }
+  [id='current-result'] {
+    width: 90%;
+    left: 0px;
+  }
   [id='calculator-container'] {
     width: 95%;
     margin-left: 0px;
@@ -187,6 +197,9 @@ div[id='btn-container-controller'].flex-container {
     font-size: 1.4rem;
     height: 80px;
   }
+  [id='current-result'] {
+    width: 95%;
+  }
 }
 @media (width<612px) {
   [id='calculator-btn-container'] > button {
@@ -197,7 +210,7 @@ div[id='btn-container-controller'].flex-container {
   }
   [id='calculator-container'] {
     padding: 2rem 5px;
-    width: 100%;
+    width: 90%;
   }
   [id='calculator-btn-container'] {
     gap: 0.5rem;

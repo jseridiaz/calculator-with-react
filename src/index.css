@@ -1,23 +1,23 @@
 :root {
+  --bg-primary-color: #242424;
+  --bg-color-btn: #393e48;
+
+  /* light-mode */
+  --bg-primary-color-light: aliceblue;
+  --font-color-ligth: black;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--bg-primary-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* bg-color */
-  --bg-primary-color: #242424;
-  --bg-color-btn: #393e48;
-  --bg-color-calc: ;
-
-  /*  */
 }
 * {
   box-sizing: border-box;
@@ -37,6 +37,7 @@
 [id='main'] {
   place-items: center;
 }
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -46,6 +47,9 @@
     color: #747bff;
   }
   button {
+    background-color: #f9f9f9;
+  }
+  [id='calculator-container'] > .input-calc {
     background-color: #f9f9f9;
   }
 }

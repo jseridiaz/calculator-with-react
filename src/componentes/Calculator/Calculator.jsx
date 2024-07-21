@@ -6,7 +6,7 @@ import { useToggle } from '../CustomHooks/useToggle/useToggle'
 import Input from '../Input/Input'
 import { arrayOperations } from '../../assets/data/arrayOperations/arrayOperations'
 import { INITIAL_STATE, reducer } from '../CustomHooks/useReducer/useReducer'
-import { SizeContext } from '../../App'
+import { SizeContext, themeContext } from '../../App'
 
 const Calculator = () => {
   const currentSizing = useContext(SizeContext)
@@ -15,6 +15,7 @@ const Calculator = () => {
   const { currentNumber, firstCalc, secondCalc, operation, result, history } =
     state
   const [toggle, setToggle] = useToggle(true)
+  const { theme, setTheme } = useContext(themeContext)
 
   const setDispatch = useCallback(
     (operation) => {
@@ -22,18 +23,35 @@ const Calculator = () => {
         type: 'END_CALC',
         payload: { firstRef: parseInt(firstRef.current.value) }
       })
+      setToggle()
     },
     [operation]
   )
+  const setDispatchFirstValue = useCallback((e) => {
+    dispatch({
+      type: 'VALUE_FIRST_CALC',
+      signal: e,
+      firstRef: parseInt(firstRef.current.value)
+    })
+    setToggle()
+  }, [])
   const setClearDispatch = useCallback(() => {
     dispatch({ type: 'CLEAR' })
+    setToggle(true)
   }, [])
+
   return (
     <>
       <h1>React Calculator</h1>
       <h2 id='current-result'>Result: {result}</h2>
       <div
-        className={firstCalc ? 'absolute border' : 'absolute'}
+        className={
+          firstCalc && theme == 'dark'
+            ? 'absolute border'
+            : firstCalc && theme == 'light'
+            ? 'absolute border-light'
+            : 'absolute'
+        }
         id='current-calc'
       >
         {firstCalc && (
@@ -59,16 +77,10 @@ const Calculator = () => {
         onSubmit={(e) => {
           e.preventDefault()
           !toggle && setDispatch(operation)
-          setToggle()
         }}
         onKeyDown={(e) => {
           if (arrayOperations.includes(e.key)) {
-            dispatch({
-              type: 'VALUE_FIRST_CALC',
-              signal: e.key,
-              firstRef: parseInt(firstRef.current.value)
-            })
-            setToggle()
+            setDispatchFirstValue(e.key)
           } else {
             dispatch({
               type: 'WRITE_VALUE_KEYBOARD',
@@ -81,7 +93,7 @@ const Calculator = () => {
       >
         <Input
           statValue={currentNumber}
-          className={'input-calc'}
+          className={`input-calc ${theme}-mode`}
           reference={firstRef}
         />
         <div id='btn-container-controller' className='flex-container'>
@@ -104,13 +116,8 @@ const Calculator = () => {
               arrayType={arrayOperations}
               action={(e) => {
                 if (toggle) {
-                  dispatch({
-                    type: 'VALUE_FIRST_CALC',
-                    firstRef: parseInt(firstRef.current.value),
-                    signal: e.target.textContent
-                  })
+                  setDispatchFirstValue(e.target.textContent)
                 }
-                setToggle()
               }}
             />
           </div>
@@ -122,7 +129,6 @@ const Calculator = () => {
             typeBtn='button'
             action={() => {
               setClearDispatch()
-              setToggle(true)
             }}
           />
           <Btn id='calc-btn' text='=' typeBtn='submit' />

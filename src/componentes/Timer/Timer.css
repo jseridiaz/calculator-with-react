@@ -3,4 +3,10 @@
   left: 5%;
   font-size: 1.4rem;
   font-weight: 800;
+  top: 12%;
+}
+@media (width<954px) {
+  [id='timer-container'] {
+    top: 15%;
+  }
 }

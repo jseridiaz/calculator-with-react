@@ -60,10 +60,12 @@ export const reducer = (state = INITIAL_STATE, action) => {
         operation: action.signal
       }
     case 'END_CALC':
+      console.log(state.firstCalc)
+      console.log(action.payload.firstRef)
       return {
         ...state,
+        secondCalc: action.payload.firstRef,
         currentNumber: '',
-        secondCalc: action.firstRef || 0,
         result: getCalc(state, action),
         history: [...state.history, getCalc(state, action)].reverse()
       }
